@@ -18,17 +18,18 @@ class Owner:
         self.name = name
     
     def pets(self):
-        return [pet for pet in Pet.all if pet.owner.name == self.name]
-        #Returns a full list of the owner's pets 
+        return [pet for pet in Pet.all if isinstance(pet.owner, Owner) and pet.owner.name == self.name]
+        #Returns a full list of the owner's pets. 
     
     def add_pet(self, pet): 
         if not isinstance(pet, Pet): 
             raise Exception("Error")
         pet.owner = self 
+        #Adds pet to owner if pet is of the Pet class. 
 
     def get_sorted_pets(self):
         owner_pets = self.pets() 
         return sorted(owner_pets, key=lambda pet: pet.name)
-        #Returns sorted list of pets by their names 
+        #Returns sorted list of pets by their names. 
     
 
